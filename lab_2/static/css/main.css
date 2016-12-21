@@ -5,11 +5,15 @@ body {
 	width: 100px;
     padding:6px;
 }
+.small {
+    max-width:200px;
+    max-height:200px;
+}
 h1 {
     color: grey;
 }
 li {
-    font-size: 250%;
+    font-size: 100%;
 }
 .header {
     text-align: left;
@@ -34,6 +38,7 @@ ul {
 	color: darkblue;
 }
 a {   
+    font-size: 250%;
     text-decoration: none;
     color: black;
 }
