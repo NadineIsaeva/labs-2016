@@ -1,0 +1,47 @@
+{
+	"cats": [{
+			"id": 0,
+			"name": "Vasya",
+			"color": "white",
+			"img": "http://hitgid.com/images/%D0%B1%D0%B5%D0%BB%D1%8B%D0%B9-%D0%BA%D0%BE%D1%82-1.jpg",
+			"age": 3,
+			"weight": 5,
+			"birthday":	"2013-02-11"
+		},
+		{
+			"id": 1,
+			"name": "Anton",
+			"color": "red",
+			"img": "http://wpapers.ru/wallpapers/animals/Cats/1905/1400x1050_%D0%A0%D1%8B%D0%B6%D0%B8%D0%B9-%D0%BA%D0%BE%D1%82.jpg",
+			"age": 6,
+			"weight": 9,
+			"birthday":	"2010-03-18"
+		},
+		{
+			"id": 2,
+			"name": "Dima",
+			"color": "black",
+			"img": "http://xproggn.net/images/data/a/8/big.a8ecc67fa23546ce061983ff208a58d2.jpg",
+			"age": 3,
+			"weight": 6,
+			"birthday":	"2013-02-16"
+		},
+		{
+			"id": 3,
+			"name": "Roma",
+			"color": "gray",
+			"img": "http://enigma-project.ru/wp-content/uploads/2014/02/kot-1.jpg",
+			"age": 10,
+			"weight": 7,
+			"birthday":	"2006-06-28"
+		},
+		{
+			"id": 4,
+			"name": "Anton",
+			"color": "brown",
+			"img": "http://cs5.pikabu.ru/post_img/2015/07/26/11/1437933708_1220052471.jpg",
+			"age": 6,
+			"weight": 9,
+			"birthday":	"2010-03-18"
+		}]
+}
