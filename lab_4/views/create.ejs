@@ -14,30 +14,35 @@
         <label class="control-label col-sm-2" for="name">Name:</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" name="name" placeholder="Enter name of your cat">
+            <div id="1" class="blockerr"></div>
         </div>
       </div>
         <div class="form-group">
           <label class="control-label col-sm-2" for="color">Color:</label>
           <div class="col-sm-6">
             <input type="text" class="form-control" name="color" placeholder="Enter color of your cat">
+            <div id="2" class="blockerr"></div>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-sm-2" for="age">Age:</label>
           <div class="col-sm-6">
             <input type="number" class="form-control" name="age" placeholder="Enter age of your cat">
+            <div id="3" class="blockerr"></div>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-sm-2" for="weight">Weight:</label>
           <div class="col-sm-6">
               <input type="number" class="form-control" name="weight" placeholder="Enter weight of your cat">
+            <div id="4" class="blockerr"></div>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-sm-2" for="img">PhotoURL:</label>
           <div class="col-sm-6">
             <input type="text" class="form-control" name="img" placeholder="Enter link to photo of your cat">
+            <div id="5" class="blockerr"></div>
           </div>
         </div>
         <div class="form-group">
@@ -51,5 +56,79 @@
         <a href="/">Home</a>
       </li>
     </ul>
+    <script>
+    window.addEventListener("load", function(evdata) {
+        const submitbtn = document.getElementById("sbmbtn");
+        const blocks = document.getElementsByClassName("form-group");
+        const name = document.getElementById("name");
+        const color = document.getElementById("color");
+        const age = document.getElementById("age");
+        const weight = document.getElementById("weight");
+        const img = document.getElementById("img");
+
+        name.addEventListener("change", () => {
+            if(name.value === "") {
+                blocks[0].setAttribute("class", "form-group has-error");
+                document.getElementById("1").innerText = "Plz fill this field";
+            }else{
+                blocks[0].setAttribute("class", "form-group has-success");
+                document.getElementById("1").innerText = "";
+            }
+            checkvalid();
+        })
+        color.addEventListener("change", () => {
+            if(color.value === "") {
+                blocks[1].setAttribute("class", "form-group has-error");
+                document.getElementById("2").innerText = "Plz fill this field";
+            }else{
+                blocks[1].setAttribute("class", "form-group has-success");
+                document.getElementById("2").innerText = "";
+            }
+            checkvalid();
+        })
+        age.addEventListener("change", () => {
+            if(!isNumeric(age.value) || age.value <= 0) {
+                blocks[2].setAttribute("class", "form-group has-error");
+                document.getElementById("3").innerText = "Plz enter number more than 0";
+            }else{
+                blocks[2].setAttribute("class", "form-group has-success");
+                document.getElementById("3").innerText = "";
+            }
+            checkvalid();
+        })
+        weight.addEventListener("change", () => {
+            if(!isNumeric(weight.value) || weight.value <= 0){
+                blocks[3].setAttribute("class", "form-group has-error");
+                document.getElementById("4").innerText = "Plz enter number more than 0";
+            }else{
+                blocks[3].setAttribute("class", "form-group has-success");
+                document.getElementById("4").innerText = "";
+            }
+            checkvalid();
+        })
+        img.addEventListener("change", () => {
+            if(img.value === "") {
+                blocks[4].setAttribute("class", "form-group has-error");
+                document.getElementById("5").innerText = "Plz fill this field";
+            }else{
+                blocks[4].setAttribute("class", "form-group has-success");
+                document.getElementById("5").innerText = "";
+            }
+            checkvalid();
+        })
+
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+
+        const checkvalid = () => {
+            if (id.value === "" || name.value === "" || author.value === "" ||
+                  date.value === "" || priceUAH.value === "" || priceUSD.value === "")
+                submitbtn.setAttribute("disabled", "true");
+            else
+                submitbtn.removeAttribute("disabled");
+        }
+    });
+</script>
   </body>
 </html>

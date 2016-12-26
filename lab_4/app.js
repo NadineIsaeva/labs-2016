@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index); //пути
+app.use('/', index);
 app.use('/cats', cats);
 app.use('/cat', cat);
 app.use('/create', create);
@@ -65,10 +65,105 @@ app.post('/cats', (req, res) => {
   .catch(err => sendError(res, err));
 });
 
-app.get('/catsJSON', (req, res) => {
-  db.cats.find()
-      .then(books => sendResult(res, books))
+app.get('/cats/:id', (req, res) => {
+  db.cats.findOne({
+    _id: mongodb.ObjectId(req.params.id)
+  })
+      .then(cat => {
+        if (cat) {
+          res.render("cat", cat);
+        } else
+          return Promise.reject(`Cat with id ${req.params.id} not found`);
+      })
       .catch(err => sendError(res, err));
 });
 
+app.get('/del/:id', (req, res) => {
+  db.cats.remove({
+    _id: mongodb.ObjectId(req.params.id)
+  }, true)
+      .then(x => sendResult(res, x))
+      .catch(err => sendError(res, err));
+});
+
+app.get('/catsJSON', (req, res) => {
+  db.cats.find()
+      .then(cats => sendResult(res, cats))
+      .catch(err => sendError(res, err));
+});
+
+
+
+// =====API====
+app.get('/api/cats', (req, res) => {
+  db.cats.find()
+      .then(cats => sendResult(res, cats))
+      .catch(err => sendError(res, err));
+})
+
+app.post('/api/cats', function (req, res){
+  db.cats.find({
+  })
+  .then(cats => {
+    id = cats.length;
+    const name = req.body.name;
+    const color = req.body.color;
+    const age = req.body.age;
+    const weight = req.body.weight;
+    const cat = {
+      id,
+      name,
+      color,
+      age,
+      weight,
+     };
+     db.cats.insert(cat)
+      .then(x => sendResult(res, x))
+      .catch(err => sendError(res, err));
+  })
+})
+
+app.get('/api/cats/:id', (req, res) => {
+  db.cats.findOne({
+    _id: mongodb.ObjectId(req.params.id)
+  })
+      .then(cat => {
+        if (cat) {
+          res.json(cat);
+        } else
+          return Promise.reject(`Cat with id ${req.params.id} not found`);
+      })
+      .catch(err => sendError(res, err));
+});
+
+app.put('/api/cats/:id', function (req, res){
+  db.cats.findOne({
+    _id: mongodb.ObjectId(req.params.id)
+  })
+  .then(cats => {
+  	id = cats.length;
+  	const name = req.body.name;
+    const color = req.body.color;
+    const age = req.body.age;
+    const weight = req.body.weight;
+    const cat = {
+      id,
+      name,
+      color,
+      age,
+      weight,
+     };
+     db.cats.insert(cat)
+      .then(x => sendResult(res, x))
+      .catch(err => sendError(res, err));
+  })
+})
+
+app.delete('/api/cats/:id', function (req, res){
+  db.cats.remove({
+    _id: mongodb.ObjectId(req.params.id)
+  }, true)
+      .then(x => sendResult(res, x))
+      .catch(err => sendError(res, err));
+})
 module.exports = app;
